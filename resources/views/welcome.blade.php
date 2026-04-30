@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf- strikes">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel React TS</title>
+        <title>Self Tracker</title>
 
         <!-- Load Vite -->
         @viteReactRefresh
