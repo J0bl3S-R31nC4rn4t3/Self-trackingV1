@@ -1,4 +1,8 @@
-import axios from 'axios';
-window.axios = axios;
+// resources/js/global.d.ts
+import { AxiosStatic } from 'axios';
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+declare global {
+    interface Window {
+        axios: AxiosStatic;
+    }
+}
