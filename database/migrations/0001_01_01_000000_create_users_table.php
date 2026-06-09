@@ -11,6 +11,7 @@ return new class extends Migration
      */
    public function up(): void
 {
+    // 1. The custom Users table
     Schema::create('users', function (Blueprint $table) {
         $table->uuid('user_id')->primary();
         $table->string('name');
@@ -22,8 +23,22 @@ return new class extends Migration
         $table->timestamps();
     });
 
-    // You can leave the default password_reset_tokens and sessions tables 
-    // that Laravel includes in this file as they are.
+    // 2. The default Password Reset table
+    Schema::create('password_reset_tokens', function (Blueprint $table) {
+        $table->string('email')->primary();
+        $table->string('token');
+        $table->timestamp('created_at')->nullable();
+    });
+
+    // 3. The Sessions table (Updated to accept UUIDs)
+    Schema::create('sessions', function (Blueprint $table) {
+        $table->string('id')->primary();
+        $table->uuid('user_id')->nullable()->index(); // Changed from foreignId to uuid
+        $table->string('ip_address', 45)->nullable();
+        $table->text('user_agent')->nullable();
+        $table->longText('payload');
+        $table->integer('last_activity')->index();
+    });
 }
 
     /**
